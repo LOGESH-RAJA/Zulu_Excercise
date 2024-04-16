@@ -14,11 +14,13 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: (){},
-        child: Icon(Icons.add)),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              ListService.add_employee("Logesh", "24/24/24", true);
+            },
+            child: Icon(Icons.add)),
         backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
-      
           title: Text("Employee List"),
           centerTitle: true,
           elevation: 0,
@@ -42,20 +44,24 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                         DateTime.now().difference(employee.joinDate).inDays >=
                             1825; // 5 years = 1825 days
                     return Container(
-                      margin: EdgeInsets.all(10),
+                        margin: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: isLongTermActiveEmployee
                                 ? Colors.green
                                 : Colors.grey.shade300),
                         child: ListTile(
-                          leading: Container(child: Center(child: Text("${employee.name[0]}",style: TextStyle(fontSize: 35),)),
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.blue.shade200
-                          )),
+                          leading: Container(
+                              child: Center(
+                                  child: Text(
+                                "${employee.name[0]}",
+                                style: TextStyle(fontSize: 35),
+                              )),
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.blue.shade200)),
                           title: Text(employee.name),
                           subtitle: Text(
                               'Joined: ${DateFormat('MMM d, yyyy').format(employee.joinDate)}'),

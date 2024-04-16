@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 import 'package:http/http.dart' as http;
 import 'package:zulu_excercise_app/model/employee_model.dart';
 
@@ -12,7 +13,6 @@ class ListService {
       if (response.statusCode == 200) {
         final List<dynamic> jsonData =
             jsonDecode(response.body)['employee_list'];
-   
 
         return jsonData.map((e) => Employee.fromJson(e)).toList();
       } else {
@@ -23,5 +23,10 @@ class ListService {
       print('Error fetching employee list: $e');
       throw Exception('Failed to fetch employee list');
     }
+  }
+
+  static void add_employee(String name, String joinDate, bool active) {
+    http.put(Uri.parse("${BASE_URL}add_employee"),
+        body: {name: name, joinDate: joinDate, active: active});
   }
 }
