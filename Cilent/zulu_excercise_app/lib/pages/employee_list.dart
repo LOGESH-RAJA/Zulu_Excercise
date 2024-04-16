@@ -14,9 +14,13 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(onPressed: (){},
+        child: Icon(Icons.add)),
         backgroundColor: Colors.grey.shade400,
         appBar: AppBar(
+      
           title: Text("Employee List"),
+          centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.grey.shade300,
         ),
@@ -30,7 +34,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
               } else {
                 List<Employee> list = snapshot.data;
                 return ListView.builder(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(15),
                   itemCount: list.length,
                   itemBuilder: (context, index) {
                     final employee = snapshot.data![index];
@@ -45,6 +49,13 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                                 ? Colors.green
                                 : Colors.grey.shade300),
                         child: ListTile(
+                          leading: Container(child: Center(child: Text("${employee.name[0]}",style: TextStyle(fontSize: 35),)),
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.blue.shade200
+                          )),
                           title: Text(employee.name),
                           subtitle: Text(
                               'Joined: ${DateFormat('MMM d, yyyy').format(employee.joinDate)}'),

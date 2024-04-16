@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+
 // Mock employee data
 const employees = [
     { id: 1, name: 'John Doe', joinDate: '2017-04-15', active: true },
@@ -28,6 +30,27 @@ app.get("/api/get_list",(req,res)=>{
         })
         
     }
+
+
+
+
+})
+
+
+app.put("/api/add_employee",(req,res)=>{
+
+    const new_employee= {
+        id: employees.length+1, 
+        name: req.body.name,
+         joinDate: req.body.joinDate,
+          active: req.body.active 
+
+
+
+    };
+
+    employees.push(new_employee);
+    console.log("New employee add succesfully");
 
 
 
