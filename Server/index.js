@@ -28,6 +28,7 @@ app.get("/api/get_list",(req,res)=>{
 
 
         })
+      
         
     }
 
@@ -37,12 +38,14 @@ app.get("/api/get_list",(req,res)=>{
 })
 
 
-app.put("/api/add_employee",(req,res)=>{
+app.post("/api/add_employee",(req,res)=>{
+    console.log(req.body);
 
     const new_employee= {
         id: employees.length+1, 
         name: req.body.name,
          joinDate: req.body.joinDate,
+
           active: req.body.active 
 
 
@@ -50,8 +53,16 @@ app.put("/api/add_employee",(req,res)=>{
     };
 
     employees.push(new_employee);
+    console.log(employees);
     console.log("New employee add succesfully");
+    
+    res.status(200).send({
+            'status_code':200,
+            'employee_list':employees
 
+
+
+        })
 
 
 
